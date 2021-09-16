@@ -1,6 +1,14 @@
 import "./index.css";
-import numeral from "numeral";
+import { getUsers } from "./api/userApi";
 
-const bDay = numeral(22071998).format("dd/mm/yyyy");
-
-console.log(bDay); // eslint-disable-line no-console
+getUsers().then((res) => {
+  let userBody = "";
+  res.forEach((user) => {
+    userBody += `<tr>
+        <td>${user.id}</td>
+        <td>${user.name}</td>
+      </tr>`;
+  });
+  global.document.getElementById("users").innerHTML = userBody;
+  console.log("body", userBody);
+});
